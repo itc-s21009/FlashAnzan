@@ -40,4 +40,13 @@ function App() {
   );
 }
 
+// 1 => 1 ~ 9
+// 2 => 10 ~ 99
+// 3 => 100 ~ 999
+const generateNumber = (digit) => {
+  const min = 10 ** (digit - 1)
+  const max = (10 ** digit) - 1
+  return digit < 1 ? -1 : Math.floor(Math.random() * (max + 1 - min)) + min
+}
+
 export default App;
