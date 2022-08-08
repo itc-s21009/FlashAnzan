@@ -6,6 +6,7 @@ import { Home } from "./Home";
 import { Page1 } from "./Page1";
 import { Page2 } from "./Page2";
 import { Page3 } from "./Page3";
+import { Test } from "./Test";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Link to="/page2">Page2</Link>
         <br />
         <Link to="/page3">Page3</Link>
+        <br />
+        <Link to="/test">Test</Link>
         <br />
 
         <Switch>
@@ -34,6 +37,9 @@ function App() {
           <Route path="/page3">
             <Page3 />
           </Route>
+          <Route path="/test">
+            <Test />
+          </Route>
         </Switch>
       </div>
     </BrowserRouter>
@@ -43,7 +49,7 @@ function App() {
 // 1 => 1 ~ 9
 // 2 => 10 ~ 99
 // 3 => 100 ~ 999
-const generateNumber = (digit) => {
+export const generateNumber = (digit) => {
   const min = 10 ** (digit - 1)
   const max = (10 ** digit) - 1
   return digit < 1 ? -1 : Math.floor(Math.random() * (max + 1 - min)) + min
