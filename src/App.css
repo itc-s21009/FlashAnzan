@@ -51,14 +51,17 @@ div {
 }
 
 .box3 {
-  width: 10em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  width: 10em; margin-left: auto; margin-right: auto; margin-bottom: 0; border: solid 3px chartreuse; border-bottom: none;
   font-size: 3em;
 }
 
 .box4 {
-  width: 10em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  width: 10em; margin-top: 0; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
   font-size: 3em;
 }
+
+.size {
+  font-size: 1em;
 
 a {
   text-decoration: none;
