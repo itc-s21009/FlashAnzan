@@ -43,9 +43,20 @@ div {
 }
 
 .box2 {
-  width: 5em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  width: 5.5em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
   font-size: 3em;
 }
+
+.box3 {
+  width: 10em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  font-size: 3em;
+}
+
+.box4 {
+  width: 10em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  font-size: 3em;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
