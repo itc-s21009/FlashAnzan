@@ -38,7 +38,7 @@ function App() {
             <Page3 />
           </Route>
           <Route path="/test">
-            <Test />
+            <Test digit={2} numberOfMembers={5} duration={3} />
           </Route>
         </Switch>
       </div>
