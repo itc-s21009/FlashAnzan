@@ -80,7 +80,7 @@ class AnswerForm extends React.Component {
             <form onSubmit={this.handleSubmit}>
                 <label>
                     <h1>回答を入力:</h1>
-                    <input type="number" value={this.state.value} onChange={this.handleChange} />
+                    <input type="number" className="no-spin" onChange={this.handleChange} />
                 </label>
             </form>
         </>
