@@ -82,7 +82,6 @@ class AnswerForm extends React.Component {
                     <h1>回答を入力:</h1>
                     <input type="number" value={this.state.value} onChange={this.handleChange} />
                 </label>
-                <input type="submit" value="Submit" />
             </form>
         </>
 }
