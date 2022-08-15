@@ -53,6 +53,11 @@ div {
   font-size: 3em;
 }
 
+a {
+  text-decoration: none;
+  color: chartreuse;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
