@@ -1,12 +1,10 @@
-
-// react-router-domのインポートを追加
 import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
 
 import { Home } from "./Home";
 import { Page1 } from "./Page1";
 import { Page2 } from "./Page2";
 import { Page3 } from "./Page3";
-
+import "./App.css";
 function App() {
   return (
     <BrowserRouter>
@@ -21,7 +19,6 @@ function App() {
         <br />
 
         <Switch>
-          {/* exactをつけると完全一致になります。Homeはexactをつけてあげます */}
           <Route exact path="/">
             <Home />
           </Route>
