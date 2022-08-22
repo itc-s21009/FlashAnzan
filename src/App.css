@@ -46,17 +46,29 @@ div {
 }
 
 .box2 {
-  width: 5.5em; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  width: 5.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 3px chartreuse;
   font-size: 3em;
 }
 
 .box3 {
-  width: 10em; margin-left: auto; margin-right: auto; margin-bottom: 0; border: solid 3px chartreuse; border-bottom: none;
+  width: 10em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 0;
+  border: solid 3px chartreuse;
+  border-bottom: none;
   font-size: 3em;
 }
 
 .box4 {
-  width: 10em; margin-top: 0; margin-left: auto; margin-right: auto; border: solid 3px chartreuse;
+  width: 10em;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border: solid 3px chartreuse;
   font-size: 3em;
 }
 
@@ -67,6 +79,25 @@ div {
 a {
   text-decoration: none;
   color: chartreuse;
+}
+
+.question {
+  font-size: 6em;
+}
+
+.result {
+  font-size: 2em;
+}
+
+input {
+  font-size: 2em;
+  color: chartreuse;
+  background-color: black;
+  border: chartreuse 3px solid;
+}
+
+input:focus {
+  outline: none;
 }
 
 @keyframes App-logo-spin {

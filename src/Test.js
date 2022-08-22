@@ -26,9 +26,9 @@ export const Test = ({ digit, numberOfMembers, duration }) => {
         const intervalId = setInterval(task, interval, 0);
     }, [])
     return ended ? <Answer rightAnswer={num} /> : (
-        <>
+        <div className="question">
             <h1>{num}</h1>
-        </>
+        </div>
     )
 }
 
@@ -39,17 +39,20 @@ const Answer = ({ rightAnswer }) => {
         setAnswered(true)
         setCorrect(userAnswer == rightAnswer)
         console.log(userAnswer)
+        setTimeout(() => {
+            window.location.reload()
+        }, 5000);
     }
     const RenderResult = () => {
         return answered ? correct ?
-            <>
+            <div className="result">
                 <h1>正解</h1>
-            </>
+            </div>
             :
-            <>
+            <div className="result">
                 <h1>不正解</h1>
                 <h1>答え：{rightAnswer}</h1>
-            </>
+            </div>
             :
             <></>
 
@@ -76,12 +79,14 @@ class AnswerForm extends React.Component {
 
     render = () =>
         <>
-            <h1>{<this.props.RenderResult />}</h1>
-            <form onSubmit={this.handleSubmit}>
-                <label>
-                    <h1>回答を入力:</h1>
-                    <input type="number" className="no-spin" onChange={this.handleChange} />
-                </label>
-            </form>
+            <div className="result">
+                <form onSubmit={this.handleSubmit}>
+                    <label>
+                        <p>回答を入力:</p>
+                        <input type="number" className="no-spin" onChange={this.handleChange} />
+                    </label>
+                </form>
+            </div>
+            {<this.props.RenderResult />}
         </>
 }
