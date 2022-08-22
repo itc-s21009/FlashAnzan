@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom";
 import { generateNumber } from "./App";
 
 export const Test = ({ digit, numberOfMembers, duration }) => {
@@ -80,6 +81,11 @@ class AnswerForm extends React.Component {
     render = () =>
         <>
             <div className="result">
+                <Link to="/">
+                    <div className="btn">
+                        タイトルに戻る
+                    </div>
+                </Link>
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         <p>回答を入力:</p>
