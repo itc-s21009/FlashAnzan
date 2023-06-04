@@ -2,34 +2,72 @@ import React, {useContext, useEffect, useState} from "react"
 import {generateNumber, SCREEN_HOME, ScreenContext} from "./App";
 
 export const Test = ({digit, numberOfMembers, duration}) => {
-    const [num, setNum] = useState(0)
-    const [ended, setEnded] = useState(false)
-    useEffect(() => {
-        const members = [...Array(numberOfMembers).keys()].map(_ => generateNumber(digit))
-        const interval = duration / numberOfMembers * 1000
-        let i = 0
-        const task = () => {
-            if (i >= numberOfMembers) {
-                let ans = 0
-                members.forEach(x => ans += x)
-                setNum(ans)
-                setEnded(true)
-                clearInterval(intervalId)
-                return
+    const STATES = {
+        COUNTDOWN: 0,
+        TESTING: 1,
+        ANSWER: 2
+    }
+    const [state, setState] = useState(STATES.COUNTDOWN)
+    const [rightAnswer, setRightAnswer] = useState()
+    const ExecCountdown = () => {
+        const [count, setCount] = useState(3)
+        useEffect(() => {
+            const intervalId = setInterval(() => {
+                setCount(count => {
+                    --count
+                    if (count <= 0) {
+                        setState(STATES.TESTING)
+                        clearInterval(intervalId)
+                    }
+                    return count
+                })
+            }, 700)
+        }, [])
+        return (
+            <div className="count">
+                <h1>{count}</h1>
+            </div>
+        )
+    }
+    const ExecTest = () => {
+        const [num, setNum] = useState(0)
+        useEffect(() => {
+            const members = [...Array(numberOfMembers).keys()].map(_ => generateNumber(digit))
+            const interval = duration / numberOfMembers * 1000
+            let i = 0
+            const task = () => {
+                if (i >= numberOfMembers) {
+                    let ans = 0
+                    members.forEach(x => ans += x)
+                    setRightAnswer(ans)
+                    setState(STATES.ANSWER)
+                    clearInterval(intervalId)
+                    return
+                }
+                setNum(members[i++])
+                setTimeout(() => {
+                    setNum("")
+                }, interval - 150);
             }
-            setNum(members[i++])
-            setTimeout(() => {
-                setNum("")
-            }, interval - 150);
-        }
-        task()
-        const intervalId = setInterval(task, interval, 0);
-    }, [digit, duration, numberOfMembers])
-    return ended ? <Answer rightAnswer={num}/> : (
-        <div className="question">
-            <h1>{num}</h1>
-        </div>
-    )
+            task()
+            const intervalId = setInterval(task, interval, 0);
+        }, [])
+        return (
+            <div className="question">
+                <h1>{num}</h1>
+            </div>
+        )
+    }
+    switch (state) {
+        case STATES.COUNTDOWN:
+            return <ExecCountdown/>
+        case STATES.TESTING:
+            return <ExecTest/>
+        case STATES.ANSWER:
+            return <Answer rightAnswer={rightAnswer}/>
+        default:
+            return <></>
+    }
 }
 
 const Answer = ({rightAnswer}) => {
@@ -39,7 +77,6 @@ const Answer = ({rightAnswer}) => {
     const submit = (userAnswer) => {
         setAnswered(true)
         setCorrect(parseInt(userAnswer) === rightAnswer)
-        console.log(userAnswer)
         setTimeout(() => {
             setScreen(SCREEN_HOME)
         }, 5000);
@@ -78,7 +115,8 @@ const AnswerForm = ({RenderResult, submit}) => {
                 }}>
                     <label>
                         <p>回答を入力:</p>
-                        <input type="number" className="no-spin" onChange={e => setAnswer(e.target.value)} autoFocus={true}/>
+                        <input type="number" className="no-spin" onChange={e => setAnswer(e.target.value)}
+                               autoFocus={true}/>
                     </label>
                 </form>
             </div>

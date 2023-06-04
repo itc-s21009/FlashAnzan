@@ -26,6 +26,11 @@ div {
   color: chartreuse;
 }
 
+.count {
+  color: white;
+  font-size: 5em;
+}
+
 .box {
   width: 5.5em;
   margin-left: auto;
