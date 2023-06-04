@@ -1,34 +1,34 @@
-import { BrowserRouter, Link, Switch, Route } from "react-router-dom";
-
 import { Home } from "./Home";
 import { Level } from "./Level";
 import "./App.css";
 import { Test } from "./Test";
+import {createContext, useState} from "react";
+
+export const ScreenContext = createContext(0)
+export const SCREEN_HOME = 0
+export const SCREEN_LEVEL = 1
+export const SCREEN_EASY = 2
+export const SCREEN_NORMAL = 3
+export const SCREEN_HARD = 4
+
+const SCREENS = {
+  [SCREEN_HOME]: <Home />,
+  [SCREEN_LEVEL]: <Level />,
+  [SCREEN_EASY]:  <Test digit={2} numberOfMembers={5} duration={10} />,
+  [SCREEN_NORMAL]: <Test digit={2} numberOfMembers={5} duration={3} />,
+  [SCREEN_HARD]: <Test digit={3} numberOfMembers={5} duration={3} />
+}
 
 function App() {
+  const [screen, setScreen] = useState(0)
+  const Screen = () => SCREENS[screen]
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route path="/level">
-            <Level />
-          </Route>
-          <Route path="/easy">
-            <Test digit={2} numberOfMembers={5} duration={10} />
-          </Route>
-          <Route path="/nomal">
-            <Test digit={2} numberOfMembers={5} duration={3} />
-          </Route>
-          <Route path="/hard">
-            <Test digit={3} numberOfMembers={5} duration={3} />
-          </Route>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+      <>
+        <ScreenContext.Provider value={setScreen}>
+          <Screen />
+        </ScreenContext.Provider>
+      </>
+  )
 }
 
 // 1 => 1 ~ 9

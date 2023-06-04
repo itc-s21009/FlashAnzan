@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom";
-import { generateNumber } from "./App";
+import React, {useContext, useEffect, useState} from "react"
+import {generateNumber, SCREEN_HOME, ScreenContext} from "./App";
 
-export const Test = ({ digit, numberOfMembers, duration }) => {
+export const Test = ({digit, numberOfMembers, duration}) => {
     const [num, setNum] = useState(0)
     const [ended, setEnded] = useState(false)
     useEffect(() => {
@@ -33,66 +32,57 @@ export const Test = ({ digit, numberOfMembers, duration }) => {
     )
 }
 
-const Answer = ({ rightAnswer }) => {
+const Answer = ({rightAnswer}) => {
     const [answered, setAnswered] = useState(false)
     const [correct, setCorrect] = useState(false)
+    const setScreen = useContext(ScreenContext)
     const submit = (userAnswer) => {
         setAnswered(true)
-        setCorrect(userAnswer === rightAnswer)
+        setCorrect(parseInt(userAnswer) === rightAnswer)
         console.log(userAnswer)
         setTimeout(() => {
-            window.location.reload()
+            setScreen(SCREEN_HOME)
         }, 5000);
     }
     const RenderResult = () => {
         return answered ? correct ?
-            <div className="result">
-                <h1>正解</h1>
-            </div>
-            :
-            <div className="result">
-                <h1>不正解</h1>
-                <h1>答え：{rightAnswer}</h1>
-            </div>
+                <div className="result">
+                    <h1>正解</h1>
+                </div>
+                :
+                <div className="result">
+                    <h1>不正解</h1>
+                    <h1>答え：{rightAnswer}</h1>
+                </div>
             :
             <></>
 
     }
     return (
-        <AnswerForm RenderResult={RenderResult} submit={submit} />
+        <AnswerForm RenderResult={RenderResult} submit={submit}/>
     )
 }
 
-class AnswerForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { value: 0 };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
-    handleChange = (event) => this.setState({ value: event.target.value });
-
-    handleSubmit = (event) => {
-        event.preventDefault();
-        this.props.submit(this.state.value)
-    }
-
-    render = () =>
+const AnswerForm = ({RenderResult, submit}) => {
+    const [answer, setAnswer] = useState(0)
+    const setScreen = useContext(ScreenContext)
+    return (
         <>
             <div className="result">
-                <Link to="/">
-                    <div className="btn">
-                        タイトルに戻る
-                    </div>
-                </Link>
-                <form onSubmit={this.handleSubmit}>
+                <div className="btn" onClick={() => setScreen(SCREEN_HOME)}>
+                    タイトルに戻る
+                </div>
+                <form onSubmit={(e) => {
+                    e.preventDefault()
+                    submit(answer)
+                }}>
                     <label>
                         <p>回答を入力:</p>
-                        <input type="number" className="no-spin" onChange={this.handleChange} />
+                        <input type="number" className="no-spin" onChange={e => setAnswer(e.target.value)}/>
                     </label>
                 </form>
             </div>
-            {<this.props.RenderResult />}
+            {<RenderResult/>}
         </>
+    )
 }
