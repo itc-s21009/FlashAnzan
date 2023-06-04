@@ -109,7 +109,7 @@ const AnswerForm = ({rightAnswer}) => {
                     <label>
                         <p>回答を入力:</p>
                         <input type="number" className="no-spin" onChange={e => setAnswer(e.target.value)}
-                               autoFocus={true}/>
+                               autoFocus={true} disabled={answered}/>
                     </label>
                 </form>
             </div>
