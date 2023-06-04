@@ -80,6 +80,7 @@ a {
 }
 
 .result {
+  margin-top: 30px;
   font-size: 2em;
 }
 
@@ -88,6 +89,8 @@ input {
   color: chartreuse;
   background-color: black;
   border: chartreuse 3px solid;
+  width: 3em;
+  text-align: center;
 }
 
 input:focus {
