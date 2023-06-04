@@ -39,8 +39,8 @@ export const Test = ({digit, numberOfMembers, duration}) => {
                 if (i >= numberOfMembers) {
                     let ans = 0
                     members.forEach(x => ans += x)
-                    setRightAnswer(ans)
                     setState(STATES.ANSWER)
+                    setRightAnswer(ans)
                     clearInterval(intervalId)
                     return
                 }
@@ -64,15 +64,16 @@ export const Test = ({digit, numberOfMembers, duration}) => {
         case STATES.TESTING:
             return <ExecTest/>
         case STATES.ANSWER:
-            return <Answer rightAnswer={rightAnswer}/>
+            return <AnswerForm rightAnswer={rightAnswer}/>
         default:
             return <></>
     }
 }
 
-const Answer = ({rightAnswer}) => {
+const AnswerForm = ({rightAnswer}) => {
     const [answered, setAnswered] = useState(false)
     const [correct, setCorrect] = useState(false)
+    const [answer, setAnswer] = useState(0)
     const setScreen = useContext(ScreenContext)
     const submit = (userAnswer) => {
         setAnswered(true)
@@ -95,14 +96,6 @@ const Answer = ({rightAnswer}) => {
             <></>
 
     }
-    return (
-        <AnswerForm RenderResult={RenderResult} submit={submit}/>
-    )
-}
-
-const AnswerForm = ({RenderResult, submit}) => {
-    const [answer, setAnswer] = useState(0)
-    const setScreen = useContext(ScreenContext)
     return (
         <>
             <div className="result">
