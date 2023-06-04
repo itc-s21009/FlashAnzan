@@ -25,8 +25,8 @@ export const Test = ({ digit, numberOfMembers, duration }) => {
         }
         task()
         const intervalId = setInterval(task, interval, 0);
-    }, [])
-    return ended ? <Answer rightAnswer={num} /> : (
+    }, [digit, duration, numberOfMembers])
+    return ended ? <Answer rightAnswer={num}/> : (
         <div className="question">
             <h1>{num}</h1>
         </div>
@@ -38,7 +38,7 @@ const Answer = ({ rightAnswer }) => {
     const [correct, setCorrect] = useState(false)
     const submit = (userAnswer) => {
         setAnswered(true)
-        setCorrect(userAnswer == rightAnswer)
+        setCorrect(userAnswer === rightAnswer)
         console.log(userAnswer)
         setTimeout(() => {
             window.location.reload()
