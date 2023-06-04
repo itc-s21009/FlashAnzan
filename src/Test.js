@@ -78,7 +78,7 @@ const AnswerForm = ({RenderResult, submit}) => {
                 }}>
                     <label>
                         <p>回答を入力:</p>
-                        <input type="number" className="no-spin" onChange={e => setAnswer(e.target.value)}/>
+                        <input type="number" className="no-spin" onChange={e => setAnswer(e.target.value)} autoFocus={true}/>
                     </label>
                 </form>
             </div>
